@@ -13,14 +13,14 @@ const TaskInput = ({ addTask }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='formInputContainer'>
       <input
         type="text"
         placeholder="Add a new task..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <button type="submit">Add Task</button>
+      <button className='btn' type="submit">Add Task</button>
     </form>
   );
 };
