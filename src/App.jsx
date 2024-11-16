@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import TaskInput from './components/TaskInput';
 import TaskList from './components/TaskList';
 import SearchBar from './components/SearchBar';
-import "./style.css";
+import "./scss/style.css";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -55,16 +55,20 @@ const App = () => {
     console.log(tasks);
 
   return (
-    <div className="App">
-      <h1>Task Manager</h1>
-      <TaskInput addTask={addTask} />
-      <SearchBar setSearchTerm={setSearchTerm} />
+    <div className="container">
+      <h1 className="heading">Task Manager</h1>
+      <div className="contents">
+      <div className="input-search-contain-container">
+        <TaskInput addTask={addTask} />
+        <SearchBar setSearchTerm={setSearchTerm} />
+      </div>
       <TaskList
         tasks={filteredTasks}
         deleteTask={deleteTask}
         toggleComplete={toggleComplete}
         updatePriority={updatePriority}
       />
+      </div>
     </div>
   );
 };
