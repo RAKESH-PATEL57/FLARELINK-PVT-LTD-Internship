@@ -5,7 +5,17 @@ import SearchBar from './components/SearchBar';
 import "./scss/style.css";
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  // Initialize state from localStorage or with an empty array
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const savedTasks = localStorage.getItem('tasks');
+      return savedTasks ? JSON.parse(savedTasks) : [];
+    } catch (error) {
+      console.error("Error parsing tasks from localStorage:", error);
+      return [];
+    }
+  });
+
   const [searchTerm, setSearchTerm] = useState('');
 
   // Save tasks to localStorage whenever the tasks array changes
@@ -52,22 +62,22 @@ const App = () => {
     )
     .sort((a, b) => b.priority - a.priority); // Sort by priority as an example
 
-    console.log(tasks);
+  console.log(tasks);
 
   return (
     <div className="container">
       <h1 className="heading">Task Manager</h1>
       <div className="contents">
-      <div className="input-search-contain-container">
-        <TaskInput addTask={addTask} />
-        <SearchBar setSearchTerm={setSearchTerm} />
-      </div>
-      <TaskList
-        tasks={filteredTasks}
-        deleteTask={deleteTask}
-        toggleComplete={toggleComplete}
-        updatePriority={updatePriority}
-      />
+        <div className="input-search-contain-container">
+          <TaskInput addTask={addTask} />
+          <SearchBar setSearchTerm={setSearchTerm} />
+        </div>
+        <TaskList
+          tasks={filteredTasks}
+          deleteTask={deleteTask}
+          toggleComplete={toggleComplete}
+          updatePriority={updatePriority}
+        />
       </div>
     </div>
   );
