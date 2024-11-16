@@ -6,13 +6,12 @@ import { FiTrash2, FiCheck } from 'react-icons/fi';
 const TaskItem = ({ task, deleteTask, toggleComplete, updatePriority }) => {
   return (
     <motion.div
-      onClick={() => toggleComplete(task.id)}
       className={`task-item ${task.completed ? 'completed' : ''}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className='allTasksNames btn'>
+      <div className='allTasksNames btn' onClick={() => toggleComplete(task.id)}>
         <FiCheck className={task.completed ? 'completed-icon' : ''} />
         <span>{task.title}</span>
       </div>
